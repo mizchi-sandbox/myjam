@@ -16,7 +16,7 @@ export default function Article(props) {
   const { id } = props
   return (
     <Query query={ARTICLE} variables={{ id }}>
-      {({ loading, error, refetch, data }) => {
+      {({ loading, error, data }) => {
         if (error) return <aside>Error</aside>
         if (loading) return <p>Loading...</p>
 

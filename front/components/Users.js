@@ -3,7 +3,7 @@ import gql from "graphql-tag"
 import { Query } from "react-apollo"
 import Link from "next/link"
 
-const query = gql`
+const USERS = gql`
   query {
     users {
       id
@@ -18,7 +18,7 @@ export default function UserList({ loading, error, users }) {
   }
 
   return (
-    <Query query={query}>
+    <Query query={USERS}>
       {({ loading, error, data }) => {
         const { users } = data
         return (

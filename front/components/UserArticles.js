@@ -34,7 +34,7 @@ export default function UserArticles(props) {
           <>
             Name: {user.name}
             <hr />
-            <DraftForm ownerId={ownerId} onSubmit={() => refetch()} />
+            <DraftForm ownerId={ownerId} onDraftCreated={() => refetch()} />
             {user.articles.map(article => {
               return (
                 <div key={article.id}>

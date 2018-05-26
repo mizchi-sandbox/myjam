@@ -11,7 +11,7 @@ const CREATE_DRAFT = gql`
 `
 
 export default function DraftForm(props) {
-  const { ownerId, onSubmit } = props
+  const { ownerId, onDraftCreated } = props
   return (
     <Mutation mutation={CREATE_DRAFT}>
       {(createDraft, { data }) => (
@@ -28,7 +28,7 @@ export default function DraftForm(props) {
               }
               await createDraft({ variables })
               form.reset()
-              onSubmit()
+              onDraftCreated()
             }}
           >
             <input placeholder="title" name="title" type="text" required />

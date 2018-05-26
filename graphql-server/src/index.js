@@ -1,10 +1,21 @@
+const path = require("path")
 const { GraphQLServer } = require("graphql-yoga")
 const { Prisma } = require("prisma-binding")
 
 const resolvers = {
   Query: {
-    posts: (_, args, context, info) => {
-      return context.prisma.query.posts(
+    article: (_, args, context, info) => {
+      return context.prisma.query.article(
+        {
+          where: {
+            id: args.id
+          }
+        },
+        info
+      )
+    },
+    articles: (_, args, context, info) => {
+      return context.prisma.query.articles(
         {
           where: {
             OR: [
@@ -25,15 +36,18 @@ const resolvers = {
         },
         info
       )
+    },
+    users: (_, args, context, info) => {
+      return context.prisma.query.users({}, info)
     }
   },
   Mutation: {
     createDraft: (_, args, context, info) => {
-      return context.prisma.mutation.createPost(
+      return context.prisma.mutation.createArticle(
         {
           data: {
             title: args.title,
-            content: args.title,
+            content: args.content,
             author: {
               connect: {
                 id: args.authorId
@@ -45,7 +59,7 @@ const resolvers = {
       )
     },
     publish: (_, args, context, info) => {
-      return context.prisma.mutation.updatePost(
+      return context.prisma.mutation.updateArticle(
         {
           where: {
             id: args.id
@@ -57,8 +71,8 @@ const resolvers = {
         info
       )
     },
-    deletePost: (_, args, context, info) => {
-      return context.prisma.mutation.deletePost(
+    deleteArticle: (_, args, context, info) => {
+      return context.prisma.mutation.deleteArticle(
         {
           where: {
             id: args.id
@@ -81,16 +95,17 @@ const resolvers = {
 }
 
 const server = new GraphQLServer({
-  typeDefs: "src/schema.graphql",
+  typeDefs: path.join(__dirname, "schema.graphql"),
   resolvers,
   context: req => ({
     ...req,
     prisma: new Prisma({
-      typeDefs: "src/generated/prisma.graphql",
+      typeDefs: path.join(__dirname, "generated/prisma.graphql"),
       endpoint: "http://localhost:4466"
     })
   })
 })
+
 server.start(() =>
   console.log(`GraphQL server is running on http://localhost:4000`)
 )

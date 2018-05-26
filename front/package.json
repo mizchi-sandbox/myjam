@@ -16,7 +16,8 @@
     "prop-types": "15.6.1",
     "react": "^16.4.0",
     "react-apollo": "2.1.0",
-    "react-dom": "^16.4.0"
+    "react-dom": "^16.4.0",
+    "redux": "^4.0.0"
   },
   "author": "",
   "license": "ISC",

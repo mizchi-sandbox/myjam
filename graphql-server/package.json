@@ -3,8 +3,20 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "start": "node src/index.js",
+    "prisma:start": "cd ./prisma && docker-compose up -d",
+    "prisma:deploy": "cd ./prisma && prisma deploy",
+    "prisma:stop": "cd ./prisma && docker-compose up stop",
+    "prisma:playground": "prisma playground -p 9999",
+    "gen:schema": "graphql get-schema --project prisma"
+  },
   "dependencies": {
     "graphql-yoga": "^1.14.4",
     "prisma-binding": "^2.0.2"
+  },
+  "devDependencies": {
+    "graphql-tools": "^3.0.2",
+    "prisma": "^1.8.3"
   }
 }

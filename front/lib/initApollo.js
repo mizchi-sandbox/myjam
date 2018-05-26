@@ -1,7 +1,7 @@
-import { ApolloClient } from 'apollo-boost'
-import { HttpLink } from 'apollo-boost'
-import { InMemoryCache } from 'apollo-boost'
-import fetch from 'isomorphic-unfetch'
+import { ApolloClient } from "apollo-boost"
+import { HttpLink } from "apollo-boost"
+import { InMemoryCache } from "apollo-boost"
+import fetch from "isomorphic-unfetch"
 
 let apolloClient = null
 
@@ -11,7 +11,8 @@ if (!process.browser) {
 }
 
 const URI_ENDPOINT =
-  'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn'
+  // 'https://api.graph.cool/simple/v1/cixmkt2ul01q00122mksg82pn'
+  "http://localhost:4000"
 
 function createClient(initialState) {
   return new ApolloClient({
@@ -19,7 +20,7 @@ function createClient(initialState) {
     ssrMode: !process.browser, // Disables forceFetch on the server (so queries are only run once)
     link: new HttpLink({
       uri: URI_ENDPOINT, // Server URL (must be absolute)
-      credentials: 'same-origin' // Additional fetch() options like `credentials` or `headers`
+      credentials: "same-origin" // Additional fetch() options like `credentials` or `headers`
     }),
     cache: new InMemoryCache().restore(initialState || {})
   })

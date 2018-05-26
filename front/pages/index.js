@@ -1,12 +1,9 @@
-import React from 'react'
-import Header from '../components/molecules/Header'
-import Submit from '../components/organisms/Submit'
-import PostList from '../components/organisms/PostList'
-
+import React from "react"
+import Header from "../components/Header"
+import Users from "../components/Users"
 export default () => (
   <>
     <Header />
-    <Submit />
-    <PostList />
+    <Users />
   </>
 )

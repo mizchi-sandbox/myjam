@@ -28,8 +28,8 @@ export default function UserList({ loading, error, users }) {
               <div key={user.id}>
                 <Link
                   href={{
-                    pathname: "/articles",
-                    query: { owner: user.id }
+                    pathname: "/user",
+                    query: { id: user.id }
                   }}
                 >
                   <a>{user.name}</a>

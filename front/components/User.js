@@ -4,7 +4,7 @@ import { Query } from "react-apollo"
 import Link from "next/link"
 import DraftForm from "./DraftForm"
 
-const USER_ARTICLES = gql`
+const USER = gql`
   query user($id: ID!) {
     user(id: $id) {
       id
@@ -17,24 +17,20 @@ const USER_ARTICLES = gql`
   }
 `
 
-export default function UserArticles(props) {
-  const { ownerId } = props
+export default function User(props) {
+  const { id } = props
   return (
-    <Query query={USER_ARTICLES} variables={{ id: ownerId }}>
-      {({ loading, error, refetch, data: { user } }) => {
-        if (error) {
-          return <aside>Error</aside>
-        }
+    <Query query={USER} variables={{ id }}>
+      {({ loading, error, refetch, data }) => {
+        if (error) return <aside>Error</aside>
+        if (loading) return <p>Loading...</p>
 
-        if (loading) {
-          return <p>Loading...</p>
-        }
-
+        const { user } = data
         return (
           <>
             Name: {user.name}
             <hr />
-            <DraftForm ownerId={ownerId} onDraftCreated={() => refetch()} />
+            <DraftForm ownerId={id} onDraftCreated={() => refetch()} />
             {user.articles.map(article => {
               return (
                 <div key={article.id}>

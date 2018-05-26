@@ -1,6 +1,6 @@
 import React from "react"
 import Header from "../components/Header"
-import UserArticles from "../components/UserArticles"
+import User from "../components/User"
 import DraftForm from "../components/DraftForm"
 import getInitialProps from "../hoc/getInitialProps"
 
@@ -10,7 +10,7 @@ export default enhancer(props => {
   return (
     <>
       <Header />
-      <UserArticles ownerId={props.owner} />
+      <User id={props.id} />
     </>
   )
 })
